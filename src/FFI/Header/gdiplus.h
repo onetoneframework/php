@@ -1,0 +1,14 @@
+GpStatus GdipCreateBitmapFromHBITMAP(void *hBitmap, void *hPalette, GpBitmap *bitmap);
+GpStatus GdipCreateFromHDC(void *hdc, GpGraphics *graphics);
+GpStatus GdipDeleteGraphics(GpGraphics graphics);
+GpStatus GdipDisposeImage(GpBitmap bitmap);
+GpStatus GdipDrawImageRect(GpGraphics *graphics, GpImage *image, float x, float y, float w, float h);
+GpStatus GdipGetImageGraphicsContext(GpImage *image, GpGraphics **graphics);
+GpStatus GdipGetImageHeight(GpBitmap bitmap, unsigned int *height);
+GpStatus GdipGetImageWidth(GpBitmap bitmap, unsigned int *width);
+GpStatus GdipLoadImageFromFile(const wchar_t *filename, GpImage **image);
+GpStatus GdiplusShutdown(ULONG_PTR token);
+GpStatus GdiplusStartup(ULONG_PTR *token, const GdiplusStartupInput *input, GdiplusStartupOutput *output);
+GpStatus GdipSaveImageToFile(GpBitmap image, const wchar_t *filename, const void *clsidEncoder, const void *encoderParams);
+GpStatus GdipDrawImageRectI(GpGraphics *graphics, GpImage *image, INT x, INT y, INT width, INT height);
+ULONG GdipCreateHBITMAPFromBitmap(GpBitmap*, HBITMAP*, unsigned long);

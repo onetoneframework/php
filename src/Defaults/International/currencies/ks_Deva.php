@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * License - Onetone Framework
+ *
+ * @copyright  Copyright (C) Onetoneframework (tactics6655@gmail.com)
+ * @license    AGPL 3.0
+ */
+
+return [
+    'Names' => [
+        'BRL' => [
+            'R$',
+            'ब्राज़िली रील',
+        ],
+        'CNY' => [
+            'CN¥',
+            'चीनी युवान',
+        ],
+        'EUR' => [
+            '€',
+            'यूरो',
+        ],
+        'GBP' => [
+            '£',
+            'बरतानवी पूनड',
+        ],
+        'INR' => [
+            '₹',
+            'इंडियन रूपी',
+        ],
+        'JPY' => [
+            'JP¥',
+            'जापानी येन',
+        ],
+        'RUB' => [
+            'RUB',
+            'रूसी रूबल',
+        ],
+        'USD' => [
+            '$',
+            'US डॉलर',
+        ],
+    ],
+];

@@ -1,0 +1,2 @@
+/*! For license information please see ModularComponent.js.LICENSE.txt */
+import{jsx as t}from"react/jsx-runtime";import"react";const e=(r,n={},o=[])=>{const s=r(n),c=({children:e,css:r,...n})=>{const c=r?[...o,r]:o;return t(s,{css:c,...n,children:e})};return c.addStyle=t=>{const s=[...o,t];return e(r,n,s)},c.addResponsiveOption=(t,s)=>{const c={...n,[t]:"object"==typeof n[t]&&"object"==typeof s?{...n[t],...s}:s};return e(r,c,o)},c.withOptions=t=>{const s={...n,...t};return e(r,s,o)},c.getOptions=()=>n,c};export{e as modularComponent};

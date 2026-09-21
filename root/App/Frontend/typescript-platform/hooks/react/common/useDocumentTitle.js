@@ -1,0 +1,1 @@
+import{useEffect as e}from"react";var t={};function o(t){e(()=>{document.title=t},[t])}t.d=(e,o)=>{for(var r in o)t.o(o,r)&&!t.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:o[r]})},t.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);export{o as useDocumentTitle};

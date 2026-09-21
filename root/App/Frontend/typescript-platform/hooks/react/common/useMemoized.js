@@ -1,0 +1,2 @@
+/*! For license information please see useMemoized.js.LICENSE.txt */
+import{useRef as r}from"react";var e={};function t(e,t){const o=r(e);return t(e,o.current)||(o.current=e),o.current}e.d=(r,t)=>{for(var o in t)e.o(t,o)&&!e.o(r,o)&&Object.defineProperty(r,o,{enumerable:!0,get:t[o]})},e.o=(r,e)=>Object.prototype.hasOwnProperty.call(r,e);export{t as useMemoized};

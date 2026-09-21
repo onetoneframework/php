@@ -1,0 +1,31 @@
+parameters:
+    level: 5
+
+    paths:
+        - src
+
+    excludePaths:
+        analyseAndScan:
+            # 1,343 generated files / 54 MB of literal `return [...]` arrays.
+            # Analysing them costs minutes and a large memory limit for zero signal.
+            - src/Defaults
+
+    bootstrapFiles:
+        - vendor/autoload.php
+
+    tmpDir: .phpstan.cache
+
+    # src carries 101 inline @phpstan-ignore comments that no longer match anything at level 5.
+    # `ignore.unmatchedLine` is non-ignorable and cannot go in the baseline, so reporting it
+    # would keep the gate permanently red. Flip this back to true once those are cleaned up.
+    reportUnmatchedIgnoredErrors: false
+
+    ignoreErrors:
+        - "#Used function preg_last_error_constant not found.#"
+        - "#Unsafe usage of new static#"
+
+includes:
+    # Regenerate with:
+    #   php vendor/bin/phpstan analyse -c phpstan.neon.dist \
+    #       --generate-baseline phpstan-baseline.neon --memory-limit 2G
+    - phpstan-baseline.neon

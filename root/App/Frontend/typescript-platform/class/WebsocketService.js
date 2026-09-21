@@ -1,0 +1,2 @@
+/*! For license information please see WebsocketService.js.LICENSE.txt */
+var e={d:(t,o)=>{for(var r in o)e.o(o,r)&&!e.o(t,r)&&Object.defineProperty(t,r,{enumerable:!0,get:o[r]})},o:(e,t)=>Object.prototype.hasOwnProperty.call(e,t)},t={};e.d(t,{H:()=>o});class o{static isSupported(){return"WebSocket"in window}static open(e,t){return!!this.isSupported()&&new WebSocket(e,t)}static send(e,t){e.send(t)}}const r=t.H;export{r as WebsocketService};

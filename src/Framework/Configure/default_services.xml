@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container
+    xmlns="http://www.cloverframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.cloverframework.org/schema/beans
+    http://www.cloverframework.org/schema/beans/spring-beans.xsd">
+    <services>
+        <service key="Renderer" class="Clover\Framework\Component\Renderer"/>
+        <service key="Resource" class="Clover\Framework\Component\Resource"/>
+        <service key="Logger" class="Clover\Classes\Logging\Logger"/>
+    </services>
+</container>

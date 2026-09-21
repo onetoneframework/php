@@ -1,0 +1,7 @@
+# EventBus response gzip module configuration
+gzip:
+  enabled: false
+  level: 6
+  min_length: 512
+  types: [json, html, text, xml]
+  excluded_paths: [/profiler]

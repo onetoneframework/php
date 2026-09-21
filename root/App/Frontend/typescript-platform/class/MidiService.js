@@ -1,0 +1,2 @@
+/*! For license information please see MidiService.js.LICENSE.txt */
+var e={d:(r,t)=>{for(var s in t)e.o(t,s)&&!e.o(r,s)&&Object.defineProperty(r,s,{enumerable:!0,get:t[s]})},o:(e,r)=>Object.prototype.hasOwnProperty.call(e,r)},r={};e.d(r,{H:()=>t});class t{isSupported(){return!!navigator.requestMIDIAccess}requestAccess(e){return!!this.isSupported&&navigator.requestMIDIAccess(e)}}const s=r.H;export{s as MidiService};

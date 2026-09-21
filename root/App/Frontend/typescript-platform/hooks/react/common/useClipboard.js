@@ -1,0 +1,2 @@
+/*! For license information please see useClipboard.js.LICENSE.txt */
+import{useCallback as e,useEffect as t,useState as r}from"react";var o={};function a(o,a=1e3){const[n,s]=r(!1),c=e(()=>{navigator.clipboard.writeText(o).then(()=>{s(!0)})},[o]);return t(()=>{let e;return n&&(e=setTimeout(()=>{s(!1)},a)),()=>{clearTimeout(e)}},[n,a]),{hasCopied:n,onCopy:c}}o.d=(e,t)=>{for(var r in t)o.o(t,r)&&!o.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:t[r]})},o.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);export{a as default};

@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * License - Onetone Framework
+ *
+ * @copyright  Copyright (C) Onetoneframework (tactics6655@gmail.com)
+ * @license    AGPL 3.0
+ */
+
+return [
+    'UserAssignedNames' => [],
+    'Names' => [
+        'BR' => 'ब्राज़ील',
+        'CN' => 'चीन',
+        'DE' => 'जर्मनी',
+        'FR' => 'फ़्रांस',
+        'GB' => 'बरतानी',
+        'IN' => 'भारत',
+        'IT' => 'इटली',
+        'JP' => 'जापान',
+        'PK' => 'पाकिस्तान',
+        'RU' => 'रशिया',
+        'US' => 'अमेरिका',
+    ],
+];

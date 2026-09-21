@@ -1,0 +1,2 @@
+/*! For license information please see XMLHTTP.js.LICENSE.txt */
+var M={d:(T,L)=>{for(var X in L)M.o(L,X)&&!M.o(T,X)&&Object.defineProperty(T,X,{enumerable:!0,get:L[X]})},o:(M,T)=>Object.prototype.hasOwnProperty.call(M,T)},T={};M.d(T,{a:()=>X,u:()=>L});const L=["MSXML2.XMLHTTP.6.0","MSXML2.XMLHTTP.5.0","MSXML2.XMLHTTP.4.0","MSXML2.XMLHTTP.3.0","MSXML2.XMLHTTP.2.0","MSXML2.XMLHTTP"],X=["Microsoft.XMLHTTP"],e=T.u,o=T.a;export{e as listMSXML2,o as listXMLHTTP};

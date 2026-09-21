@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #34373a;
+    color: #fff;
+    height: 80px;
+}
+
+header .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+}
+
+nav ul li a:hover {
+    background-color: #444;
+}
+
+nav ul li .mega-menu {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100vw;
+    background-color: #f8f8f8;
+    border-top: 1px solid #ddd;
+    display: none;
+    padding: 30px 60px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+nav ul li:hover .mega-menu {
+    display: flex;
+}
+
+.mega-menu .column {
+    flex: 1;
+    padding: 0 20px;
+}
+
+.mega-menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mega-menu h3 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #0072c6;
+}
+
+.mega-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mega-menu ul li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 6px 0;
+    font-size: 14px;
+}
+
+.mega-menu ul li a:hover {
+    color: #0072c6;
+}
+
+#contents {
+    flex: 1;
+    padding: 20px;
+}
+
+footer {
+    padding: 40px 0;
+    background-color: #e9eaec;
+    text-align: center;
+    font-size: 12px;
+    color: #52575b;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li .mega-menu {
+        position: static;
+        width: 100%;
+        flex-direction: column;
+    }
+}
+
+.logo img {
+  max-height: 35px;
+}

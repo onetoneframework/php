@@ -1,0 +1,30 @@
+RewriteRule ^vendor/.*\.(php|rb|py)$ - [F,L,NC]
+
+<FilesMatch "\.(ini|sh|log|env)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+<FilesMatch "^(\.|composer)">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+DirectoryIndex root/index.php
+
+RewriteRule ^$ root/index.php [L]
+
+RewriteCond %{REQUEST_URI} ^/root/
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteCond %{DOCUMENT_ROOT}/root%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/root%{REQUEST_URI} -d
+RewriteRule ^(.*)$ root/$1 [L]
+
+RewriteRule ^(.*)$ root/index.php [L,QSA]

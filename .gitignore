@@ -1,0 +1,30 @@
+# Composer
+/vendor/
+!/vendor/.gitkeep
+
+# Tool caches
+.php-cs-fixer.cache
+.phpstan.cache/
+.phpunit.cache/
+.phpunit.result.cache
+/result.xml
+/coverage/
+/.phpdoc/
+
+# Generated application state
+/root/App/Cache/routes.cache.php
+/root/App/Cache/*.cache
+/root/App/Log/
+/root/logs/
+/root/sessions/
+
+# Local machine files
+*.log
+*.pid
+*.err
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+*.sublime-workspace

@@ -1,0 +1,2 @@
+/*! For license information please see useRoundsStore.js.LICENSE.txt */
+import{create as o}from"zustand";const n=o()(o=>({countRounds:30,decreaseRounds:()=>o(({countRounds:o})=>({countRounds:Math.max(o-1,0)})),reloadRounds:()=>o(()=>({countRounds:30}))}));export{n as useRoundsStore};

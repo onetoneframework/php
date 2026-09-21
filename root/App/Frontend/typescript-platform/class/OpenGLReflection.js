@@ -1,0 +1,2 @@
+/*! For license information please see OpenGLReflection.js.LICENSE.txt */
+var e={d:(r,t)=>{for(var n in t)e.o(t,n)&&!e.o(r,n)&&Object.defineProperty(r,n,{enumerable:!0,get:t[n]})},o:(e,r)=>Object.prototype.hasOwnProperty.call(e,r)},r={};e.d(r,{Y:()=>t});class t{get refractiveIndexOfAir(){return 1}get refractiveIndexOfWater(){return 1.33}get refractiveIndexOfGlass(){return 1.52}get refractiveIndexOfDiamond(){return 2.42}get refractiveIndexOfIce(){return 1.309}}const n=r.Y;export{n as OprnGLReflection};

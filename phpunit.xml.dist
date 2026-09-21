@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/autoload.php" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" cacheDirectory=".phpunit.cache">
+  <!--
+    Coverage requires a driver (pcov or xdebug); neither is present on the Windows dev box, so
+    `composer test` passes the no-coverage flag and never touches this block. Use `composer test:coverage`
+    (or CI, where setup-php installs pcov) to produce reports.
+
+    PHPUnit 10.5 has no fail-under or minimum-coverage option - the only `threshold` attribute in
+    phpunit.xsd belongs to <crap4j>. No line-coverage threshold is enforced anywhere: CI runs
+    `composer test`, which passes the no-coverage flag, so build/coverage/clover.xml is never
+    produced there.
+  -->
+  <coverage includeUncoveredFiles="true" cacheDirectory=".phpunit.cache/code-coverage">
+    <report>
+      <text outputFile="php://stdout" showUncoveredFiles="false" showOnlySummary="true"/>
+      <clover outputFile="build/coverage/clover.xml"/>
+      <html outputDirectory="build/coverage/html"/>
+    </report>
+  </coverage>
+  <testsuites>
+    <testsuite name="PHP Test Suite">
+      <directory>./tests/</directory>
+    </testsuite>
+  </testsuites>
+  <source>
+    <include>
+      <directory>./src/</directory>
+      <directory>./root/App/</directory>
+    </include>
+    <exclude>
+      <!-- 1,343 generated files / 54 MB of literal `return [...]` arrays. -->
+      <directory>./src/Defaults</directory>
+      <!-- root/App is ~750 MB on disk, almost all untracked runtime data. -->
+      <directory>./root/App/Resource</directory>
+      <directory>./root/App/Attachment</directory>
+      <directory>./root/App/Cache</directory>
+    </exclude>
+  </source>
+  <php>
+    <ini name="date.timezone" value="UTC" />
+    <ini name="intl.default_locale" value="C.UTF-8" />
+    <ini name="memory_limit" value="1024M" />
+  </php>
+</phpunit>

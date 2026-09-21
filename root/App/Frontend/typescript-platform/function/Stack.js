@@ -1,0 +1,1 @@
+var e={d:(n,t)=>{for(var o in t)e.o(t,o)&&!e.o(n,o)&&Object.defineProperty(n,o,{enumerable:!0,get:t[o]})},o:(e,n)=>Object.prototype.hasOwnProperty.call(e,n)},n={};e.d(n,{A:()=>t});const t={initialize:function(e){return new Canvas2D(e)},push:function(e){},pull:function(){}},o=n.A;export{o as default};

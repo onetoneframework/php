@@ -1,0 +1,2 @@
+/*! For license information please see Component.js.LICENSE.txt */
+var e={d:(t,n)=>{for(var o in n)e.o(n,o)&&!e.o(t,o)&&Object.defineProperty(t,o,{enumerable:!0,get:n[o]})},o:(e,t)=>Object.prototype.hasOwnProperty.call(e,t)},t={};e.d(t,{A:()=>n});const n=class{constructor(e){this.type=e,this.entity=null,this.enabled=!0}init(){}update(e){}dispose(){}toJSON(){return{type:this.type,enabled:this.enabled}}fromJSON(e){this.enabled=e.enabled}},o=t.A;export{o as default};

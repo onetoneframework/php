@@ -1,0 +1,2 @@
+/*! For license information please see Midi.js.LICENSE.txt */
+var e={2060(e,r,t){t.d(r,{H:()=>s});class s{isSupported(){return!!navigator.requestMIDIAccess}requestAccess(e){return!!this.isSupported&&navigator.requestMIDIAccess(e)}}}},r={};function t(s){var o=r[s];if(void 0!==o)return o.exports;var a=r[s]={exports:{}};return e[s](a,a.exports,t),a.exports}t.d=(e,r)=>{for(var s in r)t.o(r,s)&&!t.o(e,s)&&Object.defineProperty(e,s,{enumerable:!0,get:r[s]})},t.o=(e,r)=>Object.prototype.hasOwnProperty.call(e,r);var s={};t.d(s,{A:()=>o});const o=t(2060).H,a=s.A;export{a as default};

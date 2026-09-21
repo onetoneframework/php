@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * License - Onetone Framework
+ *
+ * @copyright  Copyright (C) Onetoneframework (tactics6655@gmail.com)
+ * @license    AGPL 3.0
+ */
+
+return [
+    'Names' => [
+        'ar_PS' => 'عربي (فلسطين سيمے)',
+        'en_TC' => 'انګليسي (د ترکیے او کیکاسو ټاپو)',
+        'fo' => 'فاروئے',
+        'fo_DK' => 'فاروئے (ډنمارک)',
+        'fo_FO' => 'فاروئے (فارو ټاپو)',
+        'nb' => 'ناروے بوکمال',
+        'nb_NO' => 'ناروے بوکمال (ناروۍ)',
+        'nb_SJ' => 'ناروے بوکمال (سوالبارد او جان ميين)',
+    ],
+];

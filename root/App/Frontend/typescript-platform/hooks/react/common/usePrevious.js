@@ -1,0 +1,1 @@
+import{useEffect as e,useRef as r}from"react";var t={};function o(t){const o=r(void 0);return e(()=>{o.current=t},[t]),o.current}t.d=(e,r)=>{for(var o in r)t.o(r,o)&&!t.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:r[o]})},t.o=(e,r)=>Object.prototype.hasOwnProperty.call(e,r);export{o as usePrevious};

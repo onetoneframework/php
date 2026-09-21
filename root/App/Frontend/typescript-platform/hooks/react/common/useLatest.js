@@ -1,0 +1,1 @@
+import{useRef as t}from"react";const r=function(r){const e=t(r);return e.current=r,e};export{r as default};

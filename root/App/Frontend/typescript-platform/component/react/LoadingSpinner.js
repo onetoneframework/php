@@ -1,0 +1,1 @@
+import{jsx as e}from"react/jsx-runtime";import{useEffect as t,useState as r}from"react";const s=()=>{const[s,o]=r(!0);return t(()=>{setTimeout(()=>o(!1),3e3)},[]),e("div",{children:s?e("div",{className:"spinner"}):e("p",{children:"Complete to load resource!"})})};export{s as default};

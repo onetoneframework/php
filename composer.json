@@ -1,0 +1,119 @@
+{
+  "name": "onetone/framework",
+  "version": "v1.0.0",
+  "type": "project",
+  "description": "PHP Framework or Libraries",
+  "keywords": [
+    "php framework",
+    "php library",
+    "framework"
+  ],
+  "bin": ["bin/console"],
+  "license": "AGPL-3.0-only",
+  "suggest": {
+  },
+  "require": {
+    "php": ">=8.0.0",
+    "vlucas/phpdotenv": "^5.7"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.64",
+    "phpstan/phpstan": "^2.1",
+    "phpunit/phpunit": "^10.5"
+  },
+  "archive": {
+    "exclude": [
+      "!html",
+      "html/**/*"
+    ]
+  },
+  "authors": [
+    {
+      "name": "onetone",
+      "email": "tactics6655@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/onetone/framework/issues",
+    "source": "https://github.com/onetone/framework"
+  },
+  "autoload": {
+    "psr-4": {
+      "Clover\\": "src/",
+      "App\\": "root/App/",
+      "Iamport\\RestClient\\": "iamport/"
+    },
+    "files": [
+      "src/Framework/Livewire/functions.php"
+    ],
+    "classmap": [
+      ""
+    ],
+    "exclude-from-classmap": [
+      "/html/"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Neko\\": ["Classes/Source/", "Plugins/"],
+      "Iamport\\RestClient\\": "iamport/",
+      "Clover\\Tests\\": "tests/",
+      "Tests\\": "tests/"
+    },
+    "files": [],
+    "classmap": [
+      ""
+    ],
+    "exclude-from-classmap": [
+      "/html/"
+    ]
+  },
+  "config": {
+    "vendor-dir": "vendor",
+    "platform": {
+      "php": "8.3"
+    },
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "allow-plugins": {
+      "phpdocumentor/shim": true
+    }
+  },
+  "scripts": {
+    "dev": [
+      "Composer\\Config::disableProcessTimeout",
+      "@php -S localhost:8000 -t root"
+    ],
+    "test": "phpunit --configuration phpunit.xml.dist --no-coverage",
+    "test:coverage": [
+      "Composer\\Config::disableProcessTimeout",
+      "phpunit --configuration phpunit.xml.dist --coverage-text --coverage-clover build/coverage/clover.xml --coverage-html build/coverage/html"
+    ],
+    "analyse": "phpstan analyse -c phpstan.neon.dist --memory-limit 2G",
+    "analyse:baseline": "phpstan analyse -c phpstan.neon.dist --memory-limit 2G --generate-baseline phpstan-baseline.neon",
+    "cs": "php-cs-fixer check --config=.php-cs-fixer.dist.php --diff",
+    "cs:fix": "php-cs-fixer fix --config=.php-cs-fixer.dist.php",
+    "lint": [
+      "@cs",
+      "@analyse"
+    ],
+    "check": [
+      "@lint",
+      "@test"
+    ]
+  },
+  "scripts-descriptions": {
+    "test": "Run the PHPUnit suite. Never needs a coverage driver.",
+    "test:coverage": "Run the suite with coverage; requires the pcov or xdebug extension. Reports land in build/coverage/.",
+    "analyse": "PHPStan level 5, baselined via phpstan-baseline.neon.",
+    "analyse:baseline": "Regenerate phpstan-baseline.neon. Comment out the includes block first, or it regenerates empty.",
+    "cs": "Report code style violations without writing (php-cs-fixer check is fix in dry-run mode).",
+    "cs:fix": "Apply code style. Rewrites ~1175 files today - land it as its own commit.",
+    "lint": "cs + analyse.",
+    "check": "lint + test."
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}

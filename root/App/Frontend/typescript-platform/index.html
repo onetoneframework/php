@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Three.js Interactive Preview | Onetone</title>
+	<style>
+		:root {
+			color-scheme: dark;
+			font-family: "Segoe UI", system-ui, sans-serif;
+		}
+
+		html,
+		body {
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			background: #020712;
+			color: #eef6ff;
+		}
+
+		#threejs-preview-root {
+			width: 100vw;
+			height: 100vh;
+		}
+
+		#threejs-preview-status {
+			position: fixed;
+			left: 20px;
+			bottom: 20px;
+			z-index: 10000;
+			max-width: min(420px, calc(100vw - 68px));
+			padding: 12px 14px;
+			border: 1px solid rgba(173, 214, 255, 0.28);
+			border-radius: 12px;
+			background: rgba(6, 15, 28, 0.9);
+			box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+			backdrop-filter: blur(10px);
+			line-height: 1.5;
+			font-size: 13px;
+			pointer-events: none;
+		}
+
+		#threejs-preview-status[data-state="ready"] {
+			border-color: rgba(104, 224, 166, 0.5);
+		}
+
+		#threejs-preview-status[data-state="warning"] {
+			border-color: rgba(255, 202, 92, 0.55);
+		}
+
+		#threejs-preview-status[data-state="error"] {
+			border-color: rgba(255, 112, 112, 0.62);
+			background: rgba(48, 10, 18, 0.94);
+		}
+
+		#threejs-preview-status-title {
+			display: block;
+			margin-bottom: 6px;
+			font-size: 15px;
+		}
+	</style>
+	<script type="importmap">
+	{
+		"imports": {
+			"react": "https://esm.sh/react@19.2.0",
+			"react/jsx-runtime": "https://esm.sh/react@19.2.0/jsx-runtime",
+			"react-dom/client": "https://esm.sh/react-dom@19.2.0/client?deps=react@19.2.0",
+			"three": "https://esm.sh/three@0.180.0",
+			"three/": "https://esm.sh/three@0.180.0/",
+			"zustand": "https://esm.sh/zustand@5.0.8?deps=react@19.2.0",
+			"stats.js": "https://esm.sh/stats.js@0.17.0",
+			"three-csg-ts": "https://esm.sh/three-csg-ts@3.2.0?deps=three@0.180.0",
+			"three-spritetext": "https://esm.sh/three-spritetext@1.9.6?deps=three@0.180.0",
+			"resonance-audio": "/App/Frontend/typescript-platform/resonance-audio.js",
+			"@dimforge/rapier3d": "https://esm.sh/@dimforge/rapier3d-compat@0.19.3"
+		}
+	}
+	</script>
+</head>
+<body>
+	<div id="threejs-preview-root"></div>
+	<div id="threejs-preview-status" data-state="loading" role="status" aria-live="polite">
+		<strong id="threejs-preview-status-title">Loading interactive preview</strong>
+		<span id="threejs-preview-status-detail">Resolving browser modules and preparing the scene.</span>
+	</div>
+	<noscript>This preview requires JavaScript.</noscript>
+
+	<script type="module">
+		const PREVIEW_READY_TIMEOUT_MILLISECONDS = 120000;
+		const MAXIMUM_ERROR_MESSAGE_LENGTH = 240;
+		const ENGINE_LOADING_FAILURE_MESSAGE = "Failed to load the interactive world.";
+		const rootElement = document.getElementById("threejs-preview-root");
+		const statusElement = document.getElementById("threejs-preview-status");
+		const statusTitleElement = document.getElementById("threejs-preview-status-title");
+		const statusDetailElement = document.getElementById("threejs-preview-status-detail");
+		let readinessTimeoutIdentifier;
+		let readinessObserver;
+
+		function setPreviewStatus(state, title, detail) {
+			if (!statusElement || !statusTitleElement || !statusDetailElement) {
+				return;
+			}
+
+			statusElement.dataset.state = state;
+			statusTitleElement.textContent = title;
+			statusDetailElement.textContent = detail;
+		}
+
+		function getErrorMessage(error) {
+			const message = error instanceof Error ? error.message : String(error);
+
+			return message.slice(0, MAXIMUM_ERROR_MESSAGE_LENGTH);
+		}
+
+		function reportPreviewError(error) {
+			window.clearTimeout(readinessTimeoutIdentifier);
+			readinessObserver?.disconnect();
+			setPreviewStatus(
+				"error",
+				"Preview failed to load",
+				`${getErrorMessage(error)} Check the browser console for diagnostic details.`
+			);
+			console.error("Three.js preview failed.", error);
+		}
+
+		function updatePreviewReadiness() {
+			if (!rootElement) {
+				return;
+			}
+
+			// The preview is ready when the renderer is mounted and the engine finishes loading.
+			const rendererCanvas = rootElement.querySelector("canvas");
+			const loadingScreen = document.getElementById("loading-screen");
+			const loadingText = document.getElementById("loading-text");
+
+			if (loadingText?.textContent?.trim() === ENGINE_LOADING_FAILURE_MESSAGE) {
+				reportPreviewError(new Error(ENGINE_LOADING_FAILURE_MESSAGE));
+				return;
+			}
+
+			const loadingScreenHidden =
+				loadingScreen === null
+				|| loadingScreen.hidden
+				|| loadingScreen.style.display === "none";
+
+			if (!(rendererCanvas instanceof HTMLCanvasElement) || !loadingScreenHidden) {
+				return;
+			}
+
+			window.clearTimeout(readinessTimeoutIdentifier);
+			readinessObserver?.disconnect();
+			setPreviewStatus(
+				"ready",
+				"Interactive preview ready",
+				"Click the scene to lock the pointer. Use W, A, S, D to move and Escape to open the menu."
+			);
+		}
+
+		function handleWindowError(event) {
+			reportPreviewError(event.error ?? event.message);
+		}
+
+		function handleUnhandledRejection(event) {
+			reportPreviewError(event.reason);
+		}
+
+		async function mountPreview() {
+			if (!rootElement) {
+				throw new Error("The preview root element is missing.");
+			}
+
+			readinessObserver = new MutationObserver(updatePreviewReadiness);
+			readinessObserver.observe(rootElement, {
+				attributes: true,
+				attributeFilter: ["hidden", "style"],
+				childList: true,
+				subtree: true
+			});
+
+			readinessTimeoutIdentifier = window.setTimeout(() => {
+				setPreviewStatus(
+					"warning",
+					"The preview is still loading",
+					"Large models and audio assets can take additional time. Check the browser console if loading does not finish."
+				);
+			}, PREVIEW_READY_TIMEOUT_MILLISECONDS);
+
+			const interactiveGameModuleUrl = new URL(
+				"/App/Frontend/typescript-platform/threejs/InteractiveGameScreen.js",
+				window.location.origin
+			);
+			interactiveGameModuleUrl.searchParams.set("previewBuild", String(Date.now()));
+			const [reactModule, reactDomClientModule, interactiveGameModule] = await Promise.all([
+				import("react"),
+				import("react-dom/client"),
+				import(interactiveGameModuleUrl.href)
+			]);
+			const react = reactModule.default ?? reactModule;
+			const createRoot = reactDomClientModule.createRoot;
+			const InteractiveGameScreen = interactiveGameModule.default;
+
+			if (typeof createRoot !== "function") {
+				throw new TypeError("ReactDOM createRoot is unavailable.");
+			}
+
+			if (typeof InteractiveGameScreen !== "function") {
+				throw new TypeError("The interactive game component is unavailable.");
+			}
+
+			const previewRoot = createRoot(rootElement);
+			previewRoot.render(react.createElement(InteractiveGameScreen));
+			updatePreviewReadiness();
+		}
+
+		window.addEventListener("error", handleWindowError);
+		window.addEventListener("unhandledrejection", handleUnhandledRejection);
+		mountPreview().catch(reportPreviewError);
+	</script>
+</body>
+</html>

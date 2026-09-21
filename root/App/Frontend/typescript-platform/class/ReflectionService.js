@@ -1,0 +1,2 @@
+/*! For license information please see ReflectionService.js.LICENSE.txt */
+var r={d:(t,e)=>{for(var a in e)r.o(e,a)&&!r.o(t,a)&&Object.defineProperty(t,a,{enumerable:!0,get:e[a]})},o:(r,t)=>Object.prototype.hasOwnProperty.call(r,t)},t={};r.d(t,{h:()=>e});class e{static jsStackTrace(){let r=new Error;if(!r.stack){try{throw new Error("0")}catch(t){r=t}if(!r.stack)return null}return r.stack.toString()}}const a=t.h;export{a as StringService};

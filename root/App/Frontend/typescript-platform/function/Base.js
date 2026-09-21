@@ -1,0 +1,2 @@
+/*! For license information please see Base.js.LICENSE.txt */
+var e={d:(r,t)=>{for(var a in t)e.o(t,a)&&!e.o(r,a)&&Object.defineProperty(r,a,{enumerable:!0,get:t[a]})},o:(e,r)=>Object.prototype.hasOwnProperty.call(e,r)},r={};e.d(r,{A:()=>t});const t={resetNaviCache:()=>navigator,resetWinCache:()=>window},a=r.A;export{a as default};

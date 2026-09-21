@@ -1,0 +1,1 @@
+import{useEffect as e,useState as t}from"react";var r={};function o(r,o){const[a,n]=t(r);return e(()=>{const e=setTimeout(()=>n(r),o);return()=>clearTimeout(e)},[r,o]),a}r.d=(e,t)=>{for(var o in t)r.o(t,o)&&!r.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:t[o]})},r.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);export{o as useDebounce};

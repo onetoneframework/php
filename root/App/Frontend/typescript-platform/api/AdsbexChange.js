@@ -1,0 +1,2 @@
+/*! For license information please see AdsbexChange.js.LICENSE.txt */
+var e={d:(a,t)=>{for(var o in t)e.o(t,o)&&!e.o(a,o)&&Object.defineProperty(a,o,{enumerable:!0,get:t[o]})},o:(e,a)=>Object.prototype.hasOwnProperty.call(e,a)},a={};async function t(e=10,a=10,t,o){return await fetch(`https://adsbexchange-com1.p.rapidapi.com/v2/lat/${e}/lon/${a}/dist/250/`,{method:"GET",headers:{"X-Rapidapi-Key":t,"X-Rapidapi-Host":o}})}e.d(a,{A:()=>t}),Object.defineProperty(t,"name",{value:"default",configurable:!0});const o=a.A;export{o as default};

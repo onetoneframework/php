@@ -1,0 +1,2 @@
+/*! For license information please see useI18n.js.LICENSE.txt */
+import{useTranslation as e}from"react-i18next";var r={};function t(){const{t:r}=e();return r}r.d=(e,t)=>{for(var o in t)r.o(t,o)&&!r.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:t[o]})},r.o=(e,r)=>Object.prototype.hasOwnProperty.call(e,r);export{t as useI18n};

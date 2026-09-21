@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * License - Onetone Framework
+ *
+ * @copyright  Copyright (C) Onetoneframework (tactics6655@gmail.com)
+ * @license    AGPL 3.0
+ */
+
+return [
+    'Names' => [
+        'ady' => 'adigeo',
+        'alt' => 'altái del sur',
+        'arp' => 'arapajó',
+        'ars' => 'árabe de Néyed',
+        'bla' => 'siksiká',
+        'eu' => 'vasco',
+        'goh' => 'alemán de la alta edad antigua',
+        'grc' => 'griego clásico',
+        'ht' => 'haitiano',
+        'kbd' => 'cabardiano',
+        'krc' => 'karachái-bálkaro',
+        'lij' => 'genovés',
+        'ml' => 'malabar',
+        'mni' => 'manipuri',
+        'nr' => 'ndebele del sur',
+        'nso' => 'sesotho del norte',
+        'prg' => 'prusiano antiguo',
+        'rm' => 'retorrománico',
+        'sd' => 'sindhi',
+        'shu' => 'árabe (Chad)',
+        'sma' => 'sami del sur',
+        'st' => 'sesotho del sur',
+        'syr' => 'siríaco',
+        'tet' => 'tetun',
+        'tyv' => 'tuvano',
+        'vec' => 'véneto',
+        'wal' => 'walamo',
+        'wuu' => 'wu',
+        'xal' => 'calmuco',
+        'zun' => 'zuni',
+    ],
+    'LocalizedNames' => [
+        'sw_CD' => 'swahili (Congo)',
+    ],
+];

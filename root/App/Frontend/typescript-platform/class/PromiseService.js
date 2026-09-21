@@ -1,0 +1,2 @@
+/*! For license information please see PromiseService.js.LICENSE.txt */
+var e={d:(r,t)=>{for(var o in t)e.o(t,o)&&!e.o(r,o)&&Object.defineProperty(r,o,{enumerable:!0,get:t[o]})},o:(e,r)=>Object.prototype.hasOwnProperty.call(e,r)},r={};e.d(r,{H:()=>t});class t{static isSupported(){return"undefined"!=typeof Promise&&-1!==Promise.toString().indexOf("[native code]")}static getDeferred(){let e,r,t=new Promise(function(t,o){e=t,r=o});return{resolve:e,reject:r,promise:t}}}const o=r.H;export{o as PromiseService};

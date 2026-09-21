@@ -1,0 +1,22 @@
+/**
+ * Onetone Reactive Framework
+ *
+ * @copyright  Copyright (C) Onetoneframework (tactics6655@gmail.com)
+ * @license    AGPL 3.0
+ *
+ * Enterprise improvements over baseline:
+ *  - Class-based API (no module-level globals → multiple instances)
+ *  - Full TypeScript generics & strict interfaces
+ *  - Lifecycle hooks: onMount, onBeforeDestroy, onDestroy, onUpdate
+ *  - Computed / derived state via $computed()
+ *  - Watchers via $watch()
+ *  - Batched DOM updates via microtask queue
+ *  - Automatic event-listener cleanup (no memory leaks)
+ *  - Plugin / middleware system
+ *  - DevTools integration (state history, time-travel in debug mode)
+ *  - XSS guard for bind:html (opt-in sanitizer hook)
+ *  - Keyed <EACH> rendering (key= attribute → minimal re-renders)
+ *  - Expression evaluation for bind: attributes (not just simple keys)
+ *  - Error boundary: errors inside bindings are caught & reported
+ *  - `on:*` directive supports inline expressions and method args
+ */
