@@ -13,6 +13,12 @@ database, and render views is in this repository; the only production dependency
 The `Clover\` prefix is historical: the framework was originally developed under the name Clover,
 and the namespace was kept so existing application code keeps resolving.
 
+**Exercised on PHP 8.3.27 (Windows, NTS) with Composer 2.8.11:** `composer install` resolves and
+installs 66 packages, and `php bin/console` boots and lists all 29 commands. Route registration
+raises a `TypeError` in both the HTTP and CLI paths — read
+[Known limitations](#known-limitations) first. Everything else described below is documented from
+the source and configuration in this repository rather than from an executed run.
+
 ---
 
 ## Table of contents
@@ -84,11 +90,20 @@ what stops `..` segments from escaping.
 Console entry point:
 
 ```bash
-php bin/console route:list
+php bin/console            # prints every registered command
+php bin/console <command>
 ```
 
 `bin/console` is a two-line shim that requires `root/index.php`; the same bootstrap serves HTTP and
-CLI, and `Mapper::matchRunner()` decides which kernel runs based on the SAPI.
+CLI, and `Mapper::matchRunner()` returns `CliKernel` or `HttpKernel` according to
+`OperationSystem::isCommandLineInterface()`.
+
+**Before serving HTTP**, make sure `root/App/Cache/events` exists and is writable. Boot fails with
+`RuntimeException: ... /App/Cache/events Directory is not writable` otherwise. The directory is
+kept in the repository by a `.gitignore` placeholder, so a fresh clone already has it.
+
+Routing is currently broken in this snapshot — see [Known limitations](#known-limitations) before
+expecting any HTTP route to answer.
 
 ## Directory layout
 
@@ -283,7 +298,7 @@ Framework commands (`src/Command`):
 | `database:seed` | `DatabaseSeedCommand` | Run database seeders |
 | `drone` | `RandomDronePathCommand` | Generate and visualize a random drone flight path |
 | `exchange:rates` | `ExchangeRateCommand` | Fetch or convert exchange rates through the Frankfurter API |
-| `framework:wizard` | `WizardCommand` | Interactive wizard for composer, docker, PHP and frontend operations; prompts are translated through `Translator` |
+| `framework:wizard` | `WizardCommand` | Interactive menu for local PHP framework development tasks — composer, docker, PHP and frontend operations; prompts are translated through `Translator` |
 | `game:maze` | `MazeCommand` | Randomly generated maze |
 | `game:minesweeper` | `MinesweeperCommand` | Minesweeper |
 | `game:sokoban` | `SokobanCommand` | Sokoban |
@@ -564,7 +579,25 @@ Detected by name; the LiteSpeed response-flush path is selected automatically.
 
 ## Known limitations
 
-These are properties of the current code, stated so they are not discovered in production:
+These are properties of the current code, stated so they are not discovered in production. The
+first one is blocking.
+
+- **Route registration raises a `TypeError`, so no route can be served.**
+  `Router::addRoute()` wraps the route in a proxy — `$routeObject = self::setBaseProxy($routeObject)`
+  at `src/Classes/Routing/Router.php:465` — and then calls
+  `RouteCollection::add(string $method, RouteObject $route)` at
+  `src/Classes/Routing/RouteCollection.php:103`, whose parameter type does not admit
+  `Clover\Classes\Proxy\BaseProxy`:
+
+  ```text
+  RouteCollection::add(): Argument #2 ($route) must be of type Clover\Classes\Routing\Route,
+  Clover\Classes\Proxy\BaseProxy given, called in .../Router.php on line 468
+  ```
+
+  Every HTTP request fails with this, as does `route:list`. Bootstrap, dotenv loading, the CLI
+  router and the error renderer all work — the failure is confined to route registration. The three
+  files involved are byte-identical to the corresponding files in the Onetone monorepo, so this is
+  a framework defect carried into the package rather than a packaging fault.
 
 - The `runtime` and `application` entry points maintain **separate route tables**. A route defined
   for one is invisible to the other.

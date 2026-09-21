@@ -11,6 +11,9 @@
 /coverage/
 /.phpdoc/
 
+# Local environment file, created from root/.env.example during installation
+/root/.env
+
 # Generated application state
 /root/App/Cache/routes.cache.php
 /root/App/Cache/*.cache
